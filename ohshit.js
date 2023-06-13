@@ -56,4 +56,4 @@ client.on("messageCreate", (message) => {
     }
 });
 
-client.login("ODcwNDYyMDk2NDg2MzAxNjk2.YQNHAA.AL76dp_qWdOZ5jFLaFjvcNcjyC4");
+client.login("Token here!");
