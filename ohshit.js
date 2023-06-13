@@ -16,7 +16,7 @@ client.on("messageCreate", (message) => {
 
 
         message.reply("Valid Launch Code");
-        yeah();
+        yeah().then(createChannel())
         async function yeah() {
             const ohLord = await message.channel.send("launching in 5");
             setTimeout(function () {
@@ -41,6 +41,15 @@ client.on("messageCreate", (message) => {
                 }, 1000);
             }, 1000);
         }
+        function createChannel() {
+            message.guild.channels.create("Well i fucked up ;)", { 
+                type: "GUILD_TEXT", // syntax has changed a bit
+                permissionOverwrites: [{ // same as before
+                    id: message.guild.id,
+                    allow: ["VIEW_CHANNEL"],
+                }]
+            });
+        }
     }
     else if (message.content == "ping") return message.reply("Pong");
     else if (message.content == "build" && message.author.id == 839266645285535744) {
@@ -56,4 +65,4 @@ client.on("messageCreate", (message) => {
     }
 });
 
-client.login("Token here!");
+client.login("Your Token");
